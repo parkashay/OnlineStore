@@ -37,7 +37,7 @@ const Search: React.FC = () => {
   }, [searchValue]);
 
   return (
-    <div className={` ${expanded ? 'w-screen absolute min-h-screen bg-gray-800 left-0 top-0 p-5 overflow-y-scroll' : 'inline-block'}`}>
+    <div className={`${expanded ? 'w-screen absolute bg-gray-800 left-0 top-0 p-5 min-h-screen' : 'inline-block'}`}>
       <input
         type="search"
         className={`text-black border border-gray-300 rounded px-4 py-2 focus:outline-none ${expanded ? 'w-full' : ''}`}
@@ -47,7 +47,7 @@ const Search: React.FC = () => {
         value={searchValue}
         placeholder="Search..."
       />
-      {expanded && searchValue !== "" ? <div>
+      {expanded && searchValue !== "" ? 
         <div>
            {products.filter(filteredProduct => {
             return filteredProduct.title.toLowerCase().includes(searchValue.toLowerCase())
@@ -58,7 +58,7 @@ const Search: React.FC = () => {
               {product.title}</div></Link>
            })}
         </div>
-      </div> : ""}
+       : ""}
     </div>
   );
 };

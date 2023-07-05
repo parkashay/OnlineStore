@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { parseJsonText } from "typescript";
+import { StringLiteral, parseJsonText } from "typescript";
 
 export interface Product {
   id: number;
@@ -11,19 +11,18 @@ export interface Product {
   image: string;
   category: string;
   price: number;
+  rating: { rate: string; count: number };
 }
 
 const ProductDetailsPage = () => {
   const router = useRouter();
   const { productId } = useParams();
+  const [cartCounter, setCartCounter] = useState(0)
 
-  // Fetch the product data based on the ID and store it in a state variable
   const [product, setProduct] = useState<Product>();
 
   useEffect(() => {
-    // Fetch the product data based on the product ID and update the state
-    // You can use any API or data fetching method of your choice
-    // For example:
+   
     const fetchProductData = async () => {
       try {
         const response = await fetch(
@@ -41,11 +40,11 @@ const ProductDetailsPage = () => {
     }
   }, [productId]);
 
-  // Render the product details content
+ 
   return (
     <div className="mt-20">
       {product ? (
-        <div className="mt-5 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow md:flex-column md:max-w-full  dark:border-gray-700 dark:bg-gray-800 ">
+        <div className="mt-5 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow lg:px-40 md:max-w-full  dark:border-gray-700 dark:bg-gray-800 ">
           <img
             className="object-contain w-full rounded-t-lg h-96 "
             src={product.image}
@@ -55,12 +54,19 @@ const ProductDetailsPage = () => {
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
               {product.title}
             </h5>
-            <h2 className = "mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">Category : {product.category}</h2>
+            <h2 className="mb-2 text-l font-bold tracking-tight text-gray-900 dark:text-white">
+              Category : {product.category}
+            </h2>
             <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
               {product.description}
             </p>
+
+            <p className="text-xl mb-4">Ratings: {product.rating.rate}/5 (Rated By {product.rating.count} people)</p>
+            <p className="font-bold text-3xl">Price : ${product.price}</p>
           </div>
-          <button className="mb-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+
+          <button
+           className="mb-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
             Add to cart
           </button>
         </div>

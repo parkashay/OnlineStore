@@ -1,21 +1,15 @@
-import React from "react";
+"use client"
 
-interface Product {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  category: string;
-  price: number;
-}
-
-interface ProductCardProps {
-  product: Product;
-}
-
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+const Cart = () => {
+  const product = {
+    title : 'Product' ,
+    price : 999,
+    image : ''
+  }
+ 
   return (
-    <div className="max-w-2xl mx-auto min-h-6000">
+    <div className='mt-20'>
+       <div className="max-w-2xl mx-auto min-h-6000">
       <div className="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-600 dark:hover:bg-gray-700">
         <img
           className="rounded-t-lg p-8 object-contain h-60 w-full"
@@ -36,7 +30,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         </div>
       </div>
     </div>
-  );
-};
+    </div>
+  )
+}
 
-export default ProductCard;
+export default Cart
