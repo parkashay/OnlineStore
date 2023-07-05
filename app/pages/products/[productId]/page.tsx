@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import Link from "next/link";
 import { useParams, usePathname, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -45,10 +46,12 @@ const ProductDetailsPage = () => {
     <div className="mt-20">
       {product ? (
         <div className="mt-5 flex flex-col items-center bg-white border border-gray-200 rounded-lg shadow lg:px-40 md:max-w-full  dark:border-gray-700 dark:bg-gray-800 ">
-          <img
+          <Image
             className="object-contain w-full rounded-t-lg h-96 "
             src={product.image}
             alt="product image"
+            height={200}
+            width={200}
           />
           <div className="flex flex-col justify-between p-4 leading-normal">
             <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
