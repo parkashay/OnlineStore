@@ -52,7 +52,7 @@ const Search: React.FC = () => {
            {products.filter(filteredProduct => {
             return filteredProduct.title.toLowerCase().includes(searchValue.toLowerCase())
            }).map(product => {
-            return <Link href={`/pages/products/${product.id}`}
+            return <Link href={`/pages/products/${product.id}`} key={product.id}
             className='bg-red-500'><div className='flex rounded items-center mt-2 mb-2 border-solid border-2 border-white  gap-2'>
               <img src={product.image} alt="" className='h-20 w-20' />
               {product.title}</div></Link>
