@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { useParams, usePathname, useRouter } from "next/navigation";
+
+import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import { StringLiteral, parseJsonText } from "typescript";
+
 
 export interface Product {
   id: number;
@@ -16,9 +16,7 @@ export interface Product {
 }
 
 const ProductDetailsPage = () => {
-  const router = useRouter();
   const { productId } = useParams();
-  const [cartCounter, setCartCounter] = useState(0)
 
   const [product, setProduct] = useState<Product>();
 
@@ -28,7 +26,7 @@ const ProductDetailsPage = () => {
       try {
         const response = await fetch(
           `https://fakestoreapi.com/products/${productId}`
-        ); // Replace with your actual API endpoint
+        );
         const data = await response.json();
         setProduct(data);
       } catch (error) {

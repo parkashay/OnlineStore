@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Products from '../sections/Products';
 import Link from 'next/link';
+import Image from 'next/image';
 const Search: React.FC = () => {
     const [products, setProducts] = useState<any[]>([])
   const [searchValue, setSearchValue] = useState("");
@@ -54,7 +55,7 @@ const Search: React.FC = () => {
            }).map(product => {
             return <Link href={`/pages/products/${product.id}`} key={product.id}
             className='bg-red-500'><div className='flex rounded items-center mt-2 mb-2 border-solid border-2 border-white  gap-2'>
-              <img src={product.image} alt="" className='h-20 w-20' />
+              <Image src={product.image} alt="" className='h-20 w-20' height={100} width={100} />
               {product.title}</div></Link>
            })}
         </div>
