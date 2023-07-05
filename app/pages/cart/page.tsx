@@ -1,5 +1,7 @@
 "use client"
 
+import Image from "next/image"
+
 const Cart = () => {
   const product = {
     title : 'Product' ,
@@ -11,10 +13,12 @@ const Cart = () => {
     <div className='mt-20'>
        <div className="max-w-2xl mx-auto min-h-6000">
       <div className="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-600 dark:hover:bg-gray-700">
-        <img
+        <Image
           className="rounded-t-lg p-8 object-contain h-60 w-full"
           src={product.image}
           alt="product image"
+          height={100}
+          width={100}
         />
 
         <div className="px-5 pb-5">
