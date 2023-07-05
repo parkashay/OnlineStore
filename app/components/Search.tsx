@@ -1,6 +1,5 @@
 "use client"
 import React, { useEffect, useState } from 'react';
-import Products from '../sections/Products';
 import Link from 'next/link';
 import Image from 'next/image';
 const Search: React.FC = () => {
