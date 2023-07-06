@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import Navbar from "./components/Navbar";
 
 import "./globals.css";
@@ -8,10 +8,7 @@ import { Provider } from "react-redux";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "OnlineStore",
-  description: "For Assignment Round",
-};
+
 
 export default function RootLayout({
   children,

@@ -1,6 +1,9 @@
 import React from 'react'
 import Home from './pages/Home'
-
+export const metadata = {
+  title: "OnlineStore",
+  description: "For Assignment Round",
+};
 const page = () => {
 
   return (
