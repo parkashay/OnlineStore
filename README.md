@@ -1,2 +1,2 @@
 # View Live 
-  https://online-store-fumnl3wnv-parkashay.vercel.app/
+  https://online-store-parkashay.vercel.app
