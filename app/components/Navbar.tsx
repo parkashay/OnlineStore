@@ -2,9 +2,11 @@
 import Link from 'next/link'
 import React from 'react'
 import Search from './Search';
+import {useSelector} from 'react-redux'
+import { RootState } from '../store/store';
 
 const Navbar = () => {
-    const cartCount = 0;
+  const cartState = useSelector((state: RootState) => state.cart)
   return (
     <nav className="fixed top-0 bg-gray-800 w-full p-5 text-white flex items-center justify-around">
         <Link href={'/'} className='text-xl font-bold'>OnlineStore</Link>
@@ -12,9 +14,13 @@ const Navbar = () => {
             <Search />
         </span>
      <span className='flex'>
-     {cartCount>0? <span
+
+      {/* Cart Badge */}
+      <span
         className="ml-3 rounded-md bg-red-500 px-[0.85em] py-[0.6em] text-[0.6rem] font-bold leading-none text-white"
-        >{cartCount}</span> : ""}
+        >{cartState.count}</span> 
+
+
       <Link
         className="ml-1 text-neutral-500 transition duration-200 hover:text-neutral-700 hover:ease-in-out focus:text-neutral-700 disabled:text-black/30 motion-reduce:transition-none dark:text-neutral-200 dark:hover:text-neutral-300 dark:focus:text-neutral-300 [&.active]:text-black/90 dark:[&.active]:text-neutral-400"
         href="/pages/cart">

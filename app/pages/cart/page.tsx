@@ -1,40 +1,48 @@
 "use client"
 
 import Image from "next/image"
+import {useSelector} from 'react-redux'
+import { RootState } from '@/app/store/store';
+import { useDispatch } from "react-redux";
+import { removeFromCart, clearCart } from "@/app/slices/cartSlice";
 
 const Cart = () => {
-  const product = {
-    title : 'Product' ,
-    price : 999,
-    image : ''
-  }
  
+  const dispatch = useDispatch();
+  const cartState = useSelector((state: RootState) => state.cart)
   return (
-    <div className='mt-20'>
-       <div className="max-w-2xl mx-auto min-h-6000">
-      <div className="bg-white shadow-md rounded-lg max-w-sm dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-600 dark:hover:bg-gray-700">
-        <Image
-          className="rounded-t-lg p-8 object-contain h-60 w-full"
-          src={product.image}
-          alt="product image"
-          height={100}
-          width={100}
-        />
-
-        <div className="px-5 pb-5">
-          <h3 className="text-gray-900 font-semibold text-xl tracking-tight dark:text-white">
-            {product.title}
-          </h3>
-          <div className="flex items-center justify-between">
-            <span className="text-3xl font-bold text-gray-900 dark:text-white">
-              ${product.price}
-            </span>
-            
-          </div>
+   <div className="mt-24">
+    {cartState.cartItems.map(item => {
+      return <div key={Math.random()} className="flex flex-row gap-2 border border-solid border-white mb-2 items-center">
+        <div>
+          <Image src={item.image} height={100} width={100} alt="product img" className="h-auto w-auto" />
+        </div>
+        <div className="flex flex-col">
+        <div>{item.title}</div>
+        <div>{item.price}</div>
+        <div>
+          <button
+          onClick={() => {
+            dispatch(removeFromCart(item))
+          }}
+          className="mt-2 text-white bg-red-700  font-medium rounded-lg text-sm px-5 py-2.5 text-center">Remove</button>
+        </div>
         </div>
       </div>
-    </div>
-    </div>
+    })}
+    
+
+    {cartState.cartItems.length > 0 && <div className="text-center">
+       <button
+       onClick={() => {
+        dispatch(clearCart());
+        alert("Order Placed");
+       }}
+          className="mt-2 text-white bg-green-700  font-medium rounded-lg text-sm px-5 py-2.5 text-center">
+            Checkout
+          </button>
+    </div>}
+   </div>
   )
 }
 

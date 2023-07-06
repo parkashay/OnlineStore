@@ -3,7 +3,8 @@ import Image from "next/image";
 
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { addToCart } from "@/app/slices/cartSlice";
 
 export interface Product {
   id: number;
@@ -17,11 +18,11 @@ export interface Product {
 
 const ProductDetailsPage = () => {
   const { productId } = useParams();
+  const dispatch = useDispatch();
 
   const [product, setProduct] = useState<Product>();
 
   useEffect(() => {
-   
     const fetchProductData = async () => {
       try {
         const response = await fetch(
@@ -39,7 +40,6 @@ const ProductDetailsPage = () => {
     }
   }, [productId]);
 
- 
   return (
     <div className="mt-20">
       {product ? (
@@ -62,12 +62,25 @@ const ProductDetailsPage = () => {
               {product.description}
             </p>
 
-            <p className="text-xl mb-4">Ratings: {product.rating.rate}/5 (Rated By {product.rating.count} people)</p>
+            <p className="text-xl mb-4">
+              Ratings: {product.rating.rate}/5 (Rated By {product.rating.count}{" "}
+              people)
+            </p>
             <p className="font-bold text-3xl">Price : ${product.price}</p>
           </div>
 
           <button
-           className="mb-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            onClick={() => {
+              dispatch(
+                addToCart({
+                  title: product.title,
+                  price: product.price,
+                  image: product.image,
+                })
+              );
+            }}
+            className="mb-2 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
             Add to cart
           </button>
         </div>
